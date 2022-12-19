@@ -6,22 +6,25 @@ const Main = () => {
     const [products, setProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get('http://localhost:8000/api/products')
-            .then(res=>{
+            .then(res => {
                 // console.log(res.data.products)
                 setProducts(res.data.products);
                 setLoaded(true);
             })
             .catch(err => console.error(err));
     }, []);
-  return (
-    <div>
-        <ProductForm/>
-        <hr/>
-        {loaded && <ProductList products={ products }/>}
-    </div>
-  )
+    const removeFromDom = productId => {
+        setProducts(products.filter(product => product._id != productId));
+    }
+    return (
+        <div>
+            <ProductForm />
+            <hr />
+            {loaded && <ProductList products={products} removeFromDom={removeFromDom} />}
+        </div>
+    )
 }
 
 export default Main
