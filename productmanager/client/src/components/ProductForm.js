@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ProductForm = () => {
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState("");
+const ProductForm = (props) => {
+    const [title, setTitle] = useState(props.initialTitle);
+    const [price, setPrice] = useState(props.initialPrice);
+    const [description, setDescription] = useState(props.initialDescription);
 
     const handelSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products', {
-            title,
-            price,
-            description
-        })
-            .then(res=>{console.log(res); setTitle(""); setPrice(0); setDescription("")})
-            .catch(err=>console.log(err))
+        props.handelSubmit({title,price,description});
+        setTitle("");
+        setPrice("");
+        setDescription("");
     }
     return (
         <div>
@@ -32,7 +29,7 @@ const ProductForm = () => {
                     <label>Description: </label>
                     <input type='text' value={description} onChange={e => setDescription(e.target.value)}/>
                 </div>
-                <input style={{width:'100px', margin:'1%'}} type='submit' value='Create'/>
+                <input style={{width:'100px', margin:'1%'}} type='submit' value='Submit'/>
             </form>
         </div>
     )
