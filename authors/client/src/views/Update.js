@@ -13,11 +13,10 @@ const Update = () => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors/'+id)
             .then(res => {
-                setAuthor(res.data.author);
+                setAuthor(res.data);
                 setLoaded(true);
-                console.log(res.data);
             })
-            .catch(err => console.log(err))
+            
     }, [])
 
     const updateAuthor = author => {
@@ -38,7 +37,7 @@ const Update = () => {
     {loaded ? (<>
         <h4>Edit this author</h4>
         <AuthorForm handelSubmit={updateAuthor} initialName={author.name} errors={errors}/>
-    </>): <div><p>We're sorry, but we could not find the author you are looking for. Would you like to add this author to our database?</p><Link to={"/new"}>C</Link></div>}
+    </>): <div><p>We're sorry, but we could not find the author you are looking for. Would you like to add this author to our database?</p><Link to={"/new"}>Create new Author</Link></div>}
     </div>
   )
 }
