@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Create = (props) => {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [position, setPosition] = useState("");
-  const [status, setStatus] = useState(["Undecided", "Undecided", "Undecided"]);
+  const [status] = useState(["Undecided", "Undecided", "Undecided"]);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const handelName = (e) => {
 }
   return (
     <div>
-      <h3><Link to={"/players/list"}>List</Link> | <Link to={"/players/create"}>Add Player</Link></h3>
+      <h3><NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/players/list"}>List</NavLink> | <NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/players/create"}>Add Player</NavLink></h3>
       <h3>Add Player</h3>
       <form onSubmit={handelSubmit}>
         {props.errors.map((err, index) => <p key={index} style={{ color: "red" }}>{err}</p>)}

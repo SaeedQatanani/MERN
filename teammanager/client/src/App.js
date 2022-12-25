@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Routes,
   Route,
-  Link,
+  NavLink,
   useNavigate
 } from "react-router-dom";
 import Status from './views/Status'
@@ -47,14 +47,27 @@ const createPlayer = player => {
       })
 }
 
+const editStatus = (player,num) => {
+  axios.put('http://localhost:8000/api/players/'+player._id, player)
+  .then(res => navigate("/status/game/"+num))
+  .catch(err=>{
+      const errorResponse = err.response.data.errors;
+      const errorArr = [];
+      for (const key of Object.keys(errorResponse)) {
+          errorArr.push(errorResponse[key].message)
+      }
+      setErrors(errorArr);
+  });
+}
+
   return (
     <div className="App">
-      <h2><Link to={"/players/list"}>Manage Players</Link> | <Link to={"/status/game/1"}>Manage Player Status</Link></h2>
+      <h2><NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/players/list"}>Manage Players</NavLink> | <NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/status/game/1"}>Manage Player Status</NavLink></h2>
       <Routes>
         {/* <Route element={<Main/>} path="/players/*"/> */}
         {loaded && <Route element={<List players={players} removeFromDom={removeFromDom} />} path="/players/list" />}
         <Route element={<Create createPlayer={ createPlayer } errors={ errors }/>} path="/players/create"/>
-        <Route element={<Status players={ players }/>} path="/status/game/:num"/>
+        <Route element={<Status players={ players } changeStatus = { editStatus }/>} path="/status/game/:num"/>
         <Route element={<NoPage/>} path="/*"/>
       </Routes>
     </div>

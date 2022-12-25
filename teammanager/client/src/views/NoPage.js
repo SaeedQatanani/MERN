@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 const NoPage = () => {
   return (
     <div>
         <h1>Nothing to see here</h1>
-        <h2><Link to="/players/list">See something</Link></h2>
+        <h2><NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to="/players/list">See something</NavLink></h2>
     </div>
   )
 }

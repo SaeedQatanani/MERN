@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
     Routes,
     Route,
-    Link,
+    NavLink,
 } from "react-router-dom";
 import List from '../components/List'
 import Create from '../components/Create'
@@ -25,7 +25,7 @@ const Main = () => {
     }
     return (
         <div>
-            <h3><Link to={"/players/list"}>List</Link> | <Link to={"/players/create"}>Add Player</Link></h3>
+            <h3><NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/players/list"}>List</NavLink> | <NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/players/create"}>Add Player</NavLink></h3>
             <Routes>
                 {loaded && <Route element={<List players={players} removeFromDom={removeFromDom} />} path="list" />}
                 <Route element={<Create />} path="create" />
