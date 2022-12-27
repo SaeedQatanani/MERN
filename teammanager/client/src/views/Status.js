@@ -15,9 +15,12 @@ const Status = (props) => {
       <h3><NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/status/game/1"}>Game 1</NavLink> | <NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/status/game/2"}>Game 2</NavLink> | <NavLink style={({ isActive }) => (isActive ? {fontWeight: "bolder", textDecoration:"none"} : {})} to={"/status/game/3"}>Game 3</NavLink></h3>
       <table style={{ margin: "0 auto", border: "1px solid black", width: "60%" }}>
         <thead>
+          <tr>
           <th style={{ margin: "0 auto", border: "1px solid black" }}>Player Name</th>
           <th style={{ margin: "0 auto", border: "1px solid black" }}>Actions</th>
+          </tr>
         </thead>
+        <tbody>
         {players.map((player, i) => {
           return <tr key={i}>
             <td style={{ margin: "0 auto", border: "1px solid black" }}>{player.name}</td>
@@ -55,6 +58,7 @@ const Status = (props) => {
             </td>
           </tr>
         })}
+        </tbody>
       </table>
     </div>
   )

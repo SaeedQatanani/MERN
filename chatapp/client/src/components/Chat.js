@@ -33,7 +33,7 @@ const Chat = (props) => {
                 messages.map((msg, i) =>
                     (msg.name === props.name) ?
                         <div key={i} style={{ width: "40%", margin: "1% 0 1% auto", border: "1px solid black", backgroundColor: "#9fc5f8", boxShadow: "3px 3px 3px #777", borderRadius: "10px" }}>
-                            <span><strong>{msg.name}: </strong></span><br /> {msg.msg}
+                            <span><strong>You: </strong></span><br /> {msg.msg}
                         </div>
                         :
                         <div key={i} style={{ width: "40%", margin: "1% auto 1% 0", border: "1px solid black", backgroundColor: "#dddddd", boxShadow: "3px 3px 3px #777", borderRadius: "10px" }}>
